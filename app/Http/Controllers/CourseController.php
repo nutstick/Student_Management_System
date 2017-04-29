@@ -104,8 +104,8 @@ class CourseController extends VoyagerBreadController
         
         Log::info($dataType);
         // Section
-        $sectionType = array('SeNum' => '#', 'SeTerm' => 'Term', 'SeYear' => 'Year',
-            'sections.SeNote' => 'Note');
+        $sectionType = array('SeTerm' => 'Term', 'SeYear' => 'Year', 'SeNum' => 'Section',
+            'SeNote' => 'Note');
 
         $sections = DB::table('sections')
             ->where('CID', $id)

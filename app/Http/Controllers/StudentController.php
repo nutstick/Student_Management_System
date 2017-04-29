@@ -116,6 +116,8 @@ class StudentController extends VoyagerBreadController
             ->join('sections', 'student_enroll_in_section.section_id', '=', 'sections.id')
             ->distinct('sections.SeTerm', 'sections.SeYear')
             ->select('sections.SeTerm', 'sections.SeYear')
+            ->orderBy('sections.SeYear', 'desc')
+            ->orderBy('sections.SeTerm', 'desc')
             ->get();
         $gradePerTerms = array();
         foreach ($gradeTermList as $term) {
@@ -146,8 +148,8 @@ class StudentController extends VoyagerBreadController
             ->get();
             
         // Behavior
-        $behaviorType = array('CID' => 'Course ID', 'Cname' => 'Name', 'SeNum' => 'Section',
-            'SeTerm' => 'Term', 'SeYear' => 'Year', 'SeNote' => 'Note');
+        $behaviorType = array('Btime' => 'Time', 'Bpunisher' => 'Punisher',
+            'Bdeduct_score' => 'Score', 'Bdetail' => 'Detail');
 
         $behaviors = DB::table('behavior_records')
             ->where('SID', $id)
@@ -155,8 +157,8 @@ class StudentController extends VoyagerBreadController
             ->get();
             
         // Competition
-        $competitionType = array('courses.CID' => 'Course ID', 'courses.Cname' => 'Name', 'sections.SeNum' => 'Section',
-            'sections.SeTerm' => 'Term', 'sections.SeYear' => 'Year', 'section.SeNote' => 'Note');
+        $competitionType = array('Coname' => 'Competition', 'Coyear' => 'Year', 'Coaward' => 'Award',
+            'SFullname' => 'Student name', 'name' => 'Instructor Name');
         /*
         SELECT competitions.Coname, competitions.Coyear, competitions.Coaward,
             CONCAT(students.SFname, ' ', students.SLname) AS SFullname, users.name, users.id
@@ -176,9 +178,9 @@ class StudentController extends VoyagerBreadController
             ->join('teachers', 'competitions.Cadvisor', '=', 'teachers.id')
             ->join('users', 'teachers.user', '=', 'users.id')
             ->join('students', 'student_compete_in_competition.SID', '=', 'students.SID')
-            ->select('competitions.Coname', 'competitions.Coyear', 'competitions.Coaward',
+            ->select('student_compete_in_competition.id', 'competitions.Coname', 'competitions.Coyear', 'competitions.Coaward',
                 DB::raw('CONCAT(students.SFname, " ", students.SLname) AS SFullname'),
-                'users.name', 'users.id')
+                'users.name', 'users.id AS uid')
             ->get();
 
         return view('students.read', compact('dataType', 'dataTypeContent',

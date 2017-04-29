@@ -108,6 +108,7 @@
 
 @section('javascript')
   <script type="text/javascript" src="{{asset('js/dataTables.buttons.min.js')}}"></script>
+  <script type="text/javascript" src="{{asset('js/merge.rows.js')}}"></script>
   <script type="text/javascript" src="{{asset('js/buttons.bootstrap.min.js')}}"></script>
   <script type="text/javascript" src="{{asset('js/buttons.html5.min.js')}}"></script>
   <script>

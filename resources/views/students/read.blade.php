@@ -283,13 +283,17 @@
 									</tr>
 								</thead>
 								<tbody>
+									<?php $last = ''; ?>
 									@foreach($competitions as $data)
 									<tr>
 										@foreach($competitionType as $row => $label)
 											<td>
-												{{ $data->{$row} }}
+												@if ($last == '' || $last->{$row} != $data->{$row})
+													{{ $data->{$row} }}
+												@endif
 											</td>
 										@endforeach
+										<?php $last = $data ?>
 										<td class="no-sort no-click" id="bread-actions">
 											@if (Voyager::can('delete_'.$dataType->name))
 												<a href="javascript:;" title="Delete" class="btn btn-sm btn-danger pull-right delete" data-id="{{ $data->id }}" id="delete-{{ $data->id }}">
