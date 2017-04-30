@@ -180,7 +180,8 @@ class StudentController extends VoyagerBreadController
             ->join('students', 'student_compete_in_competition.SID', '=', 'students.SID')
             ->select('student_compete_in_competition.id', 'competitions.Coname', 'competitions.Coyear', 'competitions.Coaward',
                 DB::raw('CONCAT(students.SFname, " ", students.SLname) AS SFullname'),
-                'users.name', 'users.id AS uid')
+                DB::raw('CONCAT(users.fname, " ", users.lname) AS SFullname'),
+                'users.id AS uid')
             ->get();
 
         return view('students.read', compact('dataType', 'dataTypeContent',
