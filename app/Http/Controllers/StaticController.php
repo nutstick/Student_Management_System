@@ -76,6 +76,7 @@ class StaticController extends VoyagerBreadController
     $studentsByYear = DB::select("SELECT CEIL(DATEDIFF(CURDATE(), students.Senroll_date) / 365.25) AS year,
       COUNT(*) AS count
     FROM students
+    WHERE students.grad_stats = 'STUDYING'
     GROUP BY year");
     $label = [];
     $values = [];

@@ -8,6 +8,7 @@ use App\Enrollment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use TCG\Voyager\Facades\Voyager;
 use TCG\Voyager\Http\Controllers\VoyagerBreadController;
 
@@ -48,7 +49,17 @@ class StudentController extends VoyagerBreadController
             if ($model->timestamps) {
                 $dataTypeContent = call_user_func([$model->with($relationships)->latest(), $getter]);
             } else {
-                $dataTypeContent = call_user_func([$model->with($relationships)->orderBy('SID', 'DESC'), $getter]);
+                $query = $model->with($relationships);
+                if (Auth::user()->role_id == 3) {
+                    $query = $query
+                        ->join('teachers', 'teachers.id', '=', 'students.TID')
+                        ->where('teachers.user', '=', Auth::id());
+                } else if (Auth::user()->role_id == 4) {
+                    $query = $query
+                        ->join('managers', 'managers.Dname', '=', 'students.Dname')
+                        ->where('managers.user', '=', Auth::id());
+                }
+                $dataTypeContent = call_user_func([$query->orderBy('SID', 'DESC'), $getter]);
             }
 
             //Replace relationships' keys for labels and create READ links if a slug is provided.
@@ -61,11 +72,7 @@ class StudentController extends VoyagerBreadController
         // Check if BREAD is Translatable
         $isModelTranslatable = isBreadTranslatable($model);
 
-        $view = 'voyager::bread.browse';
-
-        if (view()->exists("voyager::$slug.browse")) {
-            $view = "voyager::$slug.browse";
-        }
+        $view = 'students.browse';
 
         return view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable'));
     }
