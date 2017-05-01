@@ -104,55 +104,6 @@
       </div>
     </div>
 	</div>
-  
-  <div class="modal fade" id="add_section_modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Creaet Section</h4>
-        </div>
-        <div class="modal-body">
-        <style>
-        .modal-open span.select2-container {
-          z-index: 100002 !important;
-          width: 100% !important;
-        },
-        .select2-dropdown {
-          z-index: 100002!important;
-        }
-        </style>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id="add_student">Save changes</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-  <!-- Confirm Delete -->
-  <div class="modal fade modal-danger" id="confirm_delete_student_modal">
-      <div class="modal-dialog">
-          <div class="modal-content">
-
-              <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal"
-                          aria-hidden="true">&times;</button>
-                  <h4 class="modal-title"><i class="voyager-warning"></i> Are You Sure</h4>
-              </div>
-
-              <div class="modal-body">
-                  <h4>Are you sure you want to delete '<span class="confirm_delete_name"></span>'</h4>
-              </div>
-
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                  <button type="button" class="btn btn-danger" id="confirm_delete_student">Yes, Delete it!
-                  </button>
-              </div>
-          </div>
-      </div>
-  </div>  
 @stop
 
 @section('javascript')
@@ -169,7 +120,7 @@
             className: "btn btn-info",
             text: '<i class="glyphicon glyphicon-pencil" style="padding-right: 12px;"></i>Create',
             action: function ( e, dt, node, config ) {
-              $('#add_section_modal').modal('show');
+              alert( 'Button activated' );
             }
           }
         ],
@@ -182,20 +133,6 @@
       });
     });
 
-    $('#add_section_modal').on('click', '#add_student', function(e) {
-      var params = {
-        SID: $('#SID').val(),
-        _token: "{{ csrf_token() }}"
-      }
-      // $.post('{{ route('competitions.student.add', $id) }}', params, function (response) {
-      //   if ( response
-      //     && response == 'success' ) {
-      //     location.reload();
-      //   } else {
-      //     toastr.error("Error add student.");
-      //   }
-      // });
-    });
 
     var deleteFormAction;
     $('td').on('click', '.delete', function (e) {
