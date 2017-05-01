@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Log;
 use TCG\Voyager\Facades\Voyager;
 use TCG\Voyager\Http\Controllers\VoyagerBreadController;
 
-class CompetitionController extends VoyagerBreadController
+class ActivityController extends VoyagerBreadController
 {
     //***************************************
     //               ____
@@ -62,7 +62,7 @@ class CompetitionController extends VoyagerBreadController
         // Check if BREAD is Translatable
         $isModelTranslatable = isBreadTranslatable($model);
 
-        $view = 'competitions.browse';
+        $view = 'activities.browse';
 
         return view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable'));
     }
@@ -104,17 +104,17 @@ class CompetitionController extends VoyagerBreadController
         // Section
         $studentType = array('SID' => 'Student ID', 'SFname' => 'First Name', 'SLname' => 'Last Name');//, 'SYear' => 'Year');
 
-        $students = DB::table('student_compete_in_competition')
-            ->where('competition', $id)
-            ->join('students', 'students.SID', '=', 'student_compete_in_competition.SID')
-            ->select('*', 'student_compete_in_competition.id')
+        $students = DB::table('student_particippate_in_activity')
+            ->where('activity', $id)
+            ->join('students', 'students.SID', '=', 'student_particippate_in_activity.SID')
+            ->select('*', 'student_particippate_in_activity.id')
             ->get();
         Log::info($students);
 
         $allStudents = Student::select('SFname', 'SLname', 'SID')
             ->get();
 
-        return view('competitions.read', compact('id', 'dataType', 'dataTypeContent',
+        return view('activities.read', compact('id', 'dataType', 'dataTypeContent',
             'studentType', 'students', 'allStudents'));
     }
 
@@ -156,7 +156,7 @@ class CompetitionController extends VoyagerBreadController
             ->orderBy('users.id', 'DESC')
             ->get();
 
-        $view = 'competitions.edit-add';
+        $view = 'activities.edit-add';
 
         return view($view, compact('dataType', 'dataTypeContent', 'teachers', 'isModelTranslatable'));
     }
@@ -220,7 +220,7 @@ class CompetitionController extends VoyagerBreadController
             ->orderBy('users.id', 'DESC')
             ->get();
 
-        $view = 'competitions.edit-add';
+        $view = 'activities.edit-add';
 
         return view($view, compact('dataType', 'dataTypeContent', 'teachers','isModelTranslatable'));
     }
@@ -308,15 +308,15 @@ class CompetitionController extends VoyagerBreadController
     }
 
     public function addStudent(Request $request, $id) {
-        DB::table('student_compete_in_competition')
+        DB::table('student_particippate_in_activity')
             ->insert(
-                ['SID' => $request->input('SID'), 'competition' => $id]
+                ['SID' => $request->input('SID'), 'activity' => $id]
             );
         return response('success', 200); 
     }
 
     public function removeStudent(Request $request, $id) {
-        DB::table('student_compete_in_competition')
+        DB::table('student_particippate_in_activity')
             ->where('id', '=', $request->input('id'))
             ->delete();
         return response('success', 200); 

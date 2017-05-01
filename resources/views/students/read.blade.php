@@ -29,54 +29,60 @@
 @section('content')
 	<div class="page-content container-fluid">
 		<div class="row">
-			<div class="col-md-5">
-        <img src="@if( strpos($dataTypeContent->image, 'http://') === false && strpos($dataTypeContent->image, 'https://') === false){{ Voyager::image( $dataTypeContent->image ) }}@else{{ $dataTypeContent->image }}@endif" style="width:100px">
+			<div class="col-md-4">
+				<div class="panel main-panel">
+					<h3>General Information</h3>
+					<style>
+						dl.dl-horizontal > dt {
+							width: 140px!important;
+							text-align: left;
+						}
+						dl.dl-horizontal > dd {
+							margin-left: 150px!important;
+						}
+					</style>
+					<dl class="dl-horizontal">
+						<dt>Student ID</dt>
+						<dd>{{ $dataTypeContent->SID }}</dd>
+						<dt>Name</dt>
+						<dd>{{ $dataTypeContent->SFname }} {{ $dataTypeContent->SLname }}</dd>
+						<dt>Gender</dt>
+						<dd>{{ $dataTypeContent->Sgender }}</dd>
+						<dt>Birthdate</dt>
+						<dd>{{ $dataTypeContent->Sbirth }}</dd>
+						<dt>Nationality</dt>
+						<dd>{{ $dataTypeContent->Snation }}</dd>
+					</dl>
+				</div>
 			</div>
-			<div class="col-md-7" style="margin-bottom: 0;">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="panel main-panel">
-							<h3>General Information</h3>
-              <style>
-                dl.dl-horizontal > dt {
-                  width: 140px!important;
-                  text-align: left;
-                }
-                dl.dl-horizontal > dd {
-                  margin-left: 150px!important;
-                }
-              </style>
-							<dl class="dl-horizontal">
-								<dt>Student ID</dt>
-								<dd>{{ $dataTypeContent->SID }}</dd>
-								<dt>Name</dt>
-								<dd>{{ $dataTypeContent->SFname }} {{ $dataTypeContent->SLname }}</dd>
-								<dt>Gender</dt>
-								<dd>{{ $dataTypeContent->Sgender }}</dd>
-								<dt>Birthdate</dt>
-								<dd>{{ $dataTypeContent->Sbirth }}</dd>
-								<dt>Nationality</dt>
-								<dd>{{ $dataTypeContent->Snation }}</dd>
-							</dl>
-						</div>
-          </div>
-          <div class="col-md-6">
-            <div class="panel main-panel">
-							<h3 class="main-panel-title">Education Information</h3>
-							<dl class="dl-horizontal">
-								<dt>Enrollment date</dt>
-								<dd>{{ $dataTypeContent->Senroll_date }}</dd>
-								<dt>Education Status</dt>
-								<dd>{{ $dataTypeContent->Sedu_stat }}</dd>
-								<dt>Health Status</dt>
-								<dd>{{ $dataTypeContent->Shealth_stat }}</dd>
-								<dt>Behavior score</dt>
-								<dd>{{ $dataTypeContent->Sbehav_score }}</dd>
-								<dt>Detail</dt>
-								<dd>{{ $dataTypeContent->Sdetail }}</dd>
-							</dl>
-						</div>
-					</div>
+			<div class="col-md-4">
+				<div class="panel main-panel">
+					<h3>Grade summary</h3>
+					<dl class="dl-horizontal">
+						<dt>CAX</dt>
+						<dd>{{ $gpa->CAX }}</dd>
+						<dt>GPX</dt>
+						<dd>{{ $gpa->GPX }}</dd>
+						<dt>GPAX</dt>
+						<dd>{{ $gpa->GPAX }}</dd>
+					</dl>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="panel main-panel">
+					<h3 class="main-panel-title">Education Information</h3>
+					<dl class="dl-horizontal">
+						<dt>Enrollment date</dt>
+						<dd>{{ $dataTypeContent->Senroll_date }}</dd>
+						<dt>Education Status</dt>
+						<dd>{{ $dataTypeContent->Sedu_stat }}</dd>
+						<dt>Health Status</dt>
+						<dd>{{ $dataTypeContent->Shealth_stat }}</dd>
+						<dt>Behavior score</dt>
+						<dd>{{ $dataTypeContent->Sbehav_score }}</dd>
+						<dt>Detail</dt>
+						<dd>{{ $dataTypeContent->Sdetail }}</dd>
+					</dl>
 				</div>
 			</div>
 		</div>
@@ -88,7 +94,7 @@
 				<li role="presentation"><a href="#enrollment" aria-controls="enrollment" role="tab" data-toggle="tab">Enrollment</a></li>
 				<li role="presentation"><a href="#behavior" aria-controls="behavior" role="tab" data-toggle="tab">Behavior Record</a></li>
 				<li role="presentation"><a href="#competition" aria-controls="competition" role="tab" data-toggle="tab">Competition</a></li>
-				<li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+				<li role="presentation"><a href="#activity" aria-controls="activity" role="tab" data-toggle="tab">Activity</a></li>
 			</ul>
 
 			<!-- Tab panes -->
@@ -262,7 +268,7 @@
 					</div>
 				</div>
 				<div role="tabpanel" class="tab-pane" id="competition">
-				<div class="row">
+					<div class="row">
 						<div class="col-md-12">
 							<div class="row">
 								<!--<i class="{{ $dataType->icon }}"></i> -->
@@ -279,7 +285,6 @@
 										@foreach($competitionType as $row => $label)
 										<th>{{ $label }}</th>
 										@endforeach
-										<th class="actions">Actions</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -294,23 +299,6 @@
 											</td>
 										@endforeach
 										<?php $last = $data ?>
-										<td class="no-sort no-click" id="bread-actions">
-											@if (Voyager::can('delete_'.$dataType->name))
-												<a href="javascript:;" title="Delete" class="btn btn-sm btn-danger pull-right delete" data-id="{{ $data->id }}" id="delete-{{ $data->id }}">
-													<i class="voyager-trash"></i> <span class="hidden-xs hidden-sm">Delete</span>
-												</a>
-											@endif
-											@if (Voyager::can('edit_'.$dataType->name))
-												<a href="{{ route('voyager.'.$dataType->slug.'.edit', $data->id) }}" title="Edit" class="btn btn-sm btn-primary pull-right edit">
-													<i class="voyager-edit"></i> <span class="hidden-xs hidden-sm">Edit</span>
-												</a>
-											@endif
-											@if (Voyager::can('read_'.$dataType->name))
-												<a href="{{ route('voyager.'.$dataType->slug.'.show', $data->id) }}" title="View" class="btn btn-sm btn-warning pull-right">
-													<i class="voyager-eye"></i> <span class="hidden-xs hidden-sm">View</span>
-												</a>
-											@endif
-										</td>
 									</tr>
 									@endforeach
 								</tbody>
@@ -318,7 +306,45 @@
 						</div>
 					</div>
 				</div>
-				<div role="tabpanel" class="tab-pane" id="settings">...</div>
+				<div role="tabpanel" class="tab-pane" id="activity">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="row">
+								<!--<i class="{{ $dataType->icon }}"></i> -->
+								<div class="col-md-3">
+									<h3>
+										Activity
+									</h3>
+								</div>
+							</div>
+							
+							<table id="dataTable4" class="row table table-hover">
+								<thead>
+									<tr>
+										@foreach($activityType as $row => $label)
+										<th>{{ $label }}</th>
+										@endforeach
+									</tr>
+								</thead>
+								<tbody>
+									<?php $last = ''; ?>
+									@foreach($activities as $data)
+									<tr>
+										@foreach($activityType as $row => $label)
+											<td>
+												@if ($last == '' || $last->{$row} != $data->{$row})
+													{{ $data->{$row} }}
+												@endif
+											</td>
+										@endforeach
+										<?php $last = $data ?>
+									</tr>
+									@endforeach
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -341,6 +367,14 @@
         @if(config('dashboard.data_tables.responsive')), responsive: true @endif
       });
       var table2 = $('#dataTable2').DataTable({
+        "order": []
+        @if(config('dashboard.data_tables.responsive')), responsive: true @endif
+      });
+      var table2 = $('#dataTable3').DataTable({
+        "order": []
+        @if(config('dashboard.data_tables.responsive')), responsive: true @endif
+      });
+      var table2 = $('#dataTable4').DataTable({
         "order": []
         @if(config('dashboard.data_tables.responsive')), responsive: true @endif
       });

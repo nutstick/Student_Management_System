@@ -103,6 +103,22 @@ class StudentController extends VoyagerBreadController
         //Replace relationships' keys for labels and create READ links if a slug is provided.
         $dataTypeContent = $this->resolveRelations($dataTypeContent, $dataType, true);
 
+        $gpa = DB::select("SELECT
+                SUM(CGPX) AS GPX,
+                SUM(CGPX) / SUM(s.Ccredit) AS GPAX, SUM(s.Ccredit) AS CAX
+            FROM (
+                SELECT ( AVG(student_enroll_in_section.grade) * courses.Ccredit ) AS CGPX,
+                    students.*, courses.Ccredit, courses.CID
+                FROM `student_enroll_in_section`
+                JOIN students ON student_enroll_in_section.SID = students.SID
+                JOIN sections ON student_enroll_in_section.section_id = sections.id
+                JOIN courses ON sections.CID = courses.CID
+                WHERE student_enroll_in_section.SID = $id
+                GROUP BY courses.CID, students.SID
+            ) AS s
+            GROUP BY s.SID
+        ")[0];
+
         // Check if BREAD is Translatable
         $isModelTranslatable = isBreadTranslatable($dataTypeContent);
 
@@ -161,7 +177,9 @@ class StudentController extends VoyagerBreadController
             'SFullname' => 'Student name', 'name' => 'Instructor Name');
         /*
         SELECT competitions.Coname, competitions.Coyear, competitions.Coaward,
-            CONCAT(students.SFname, ' ', students.SLname) AS SFullname, users.name, users.id
+            CONCAT(students.SFname, ' ', students.SLname) AS SFullname,
+            CONCAT(users.fname, " ", users.lname) AS SFullname,
+            users.id
         FROM (select competition from student_compete_in_competition WHERE SID = $id) AS c
         INNER JOIN student_compete_in_competition ON c.competition = student_compete_in_competition.competition
         INNER JOIN competitions on c.competition = competitions.id
@@ -184,11 +202,43 @@ class StudentController extends VoyagerBreadController
                 'users.id AS uid')
             ->get();
 
-        return view('students.read', compact('dataType', 'dataTypeContent',
+        // Activity
+        $activityType = array('Aname' => 'Activity', 'Ayear' => 'Year', 'Adetail' => 'Detail',
+            'SFullname' => 'Student name', 'name' => 'Instructor Name');
+        /*
+        SELECT activities.Aname, activities.Ayear, activities.Adetail,
+            CONCAT(students.SFname, ' ', students.SLname) AS SFullname,
+            CONCAT(users.fname, " ", users.lname) AS SFullname,
+            users.id
+        FROM (select activity from student_particippate_in_activity WHERE SID = $id) AS c
+        INNER JOIN student_particippate_in_activity ON c.competition = student_compete_in_competition.competition
+        INNER JOIN competitions on c.competition = competitions.id
+        INNER JOIN teachers on competitions.Cadvisor = teachers.id
+        INNER JOIN users on teachers.user = users.id
+        INNER JOIN students on student_compete_in_competition.SID = students.SID
+        */
+        $activityQuery = DB::table('student_particippate_in_activity')
+            ->where('SID', $id)
+            ->select('*');
+        $activities = DB::table(DB::raw("({$activityQuery->toSql()}) AS c"))
+            ->mergeBindings($activityQuery)
+            ->join('student_particippate_in_activity', 'c.activity', '=', 'student_particippate_in_activity.activity')
+            ->join('activities', 'c.activity', '=', 'activities.id')
+            ->join('teachers', 'activities.Aadvisor', '=', 'teachers.id')
+            ->join('users', 'teachers.user', '=', 'users.id')
+            ->join('students', 'student_particippate_in_activity.SID', '=', 'students.SID')
+            ->select('student_particippate_in_activity.id', 'activities.Aname', 'activities.Ayear', 'activities.Adetail',
+                DB::raw('CONCAT(students.SFname, " ", students.SLname) AS SFullname'),
+                DB::raw('CONCAT(users.fname, " ", users.lname) AS name'),
+                'users.id AS uid')
+            ->get();
+
+        return view('students.read', compact('dataType', 'dataTypeContent', 'gpa',
             'gradeType', 'gradePerTerms',
             'enrollType', 'enrollments',
             'behaviorType', 'behaviors', 
-            'competitionType', 'competitions', 'isModelTranslatable'));
+            'competitionType', 'competitions',
+            'activityType', 'activities', 'isModelTranslatable'));
     }
 
     //***************************************

@@ -23,7 +23,7 @@ class Student extends Model
         return 'SID';
     }
 
-    public function getFullAttribute() {
-        return $this->SID;
+    public function getFullnameAttribute() {
+        return $this->SFname.' '.$this->SLname;
     }
 }

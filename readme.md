@@ -1,3 +1,5 @@
+php artisan vendor:publish --tag=charts_config
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
