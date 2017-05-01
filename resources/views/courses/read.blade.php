@@ -120,7 +120,7 @@
             className: "btn btn-info",
             text: '<i class="glyphicon glyphicon-pencil" style="padding-right: 12px;"></i>Create',
             action: function ( e, dt, node, config ) {
-              alert( 'Button activated' );
+              window.location = {route('voyager.'.$dataType->slug.'.edit', $data->id)}
             }
           }
         ],
