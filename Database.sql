@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2017 at 04:22 PM
+-- Generation Time: May 01, 2017 at 01:04 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.1
 
@@ -75,13 +75,6 @@ CREATE TABLE `courses` (
   `Ccredit` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `courses`
---
-
-INSERT INTO `courses` (`CID`, `Ctype`, `Cname`, `Ccredit`) VALUES
-('2110422', 'NONE', 'DB MGT SYS DESIGN', 3);
-
 -- --------------------------------------------------------
 
 --
@@ -119,26 +112,13 @@ CREATE TABLE `data_rows` (
 --
 
 INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, `required`, `browse`, `read`, `edit`, `add`, `delete`, `details`) VALUES
-(14, 2, 'id', 'number', 'id', 1, 0, 0, 0, 0, 0, ''),
-(15, 2, 'author_id', 'text', 'author_id', 1, 0, 0, 0, 0, 0, ''),
-(16, 2, 'title', 'text', 'title', 1, 1, 1, 1, 1, 1, ''),
-(17, 2, 'excerpt', 'text_area', 'excerpt', 1, 0, 1, 1, 1, 1, ''),
-(18, 2, 'body', 'rich_text_box', 'body', 1, 0, 1, 1, 1, 1, ''),
-(19, 2, 'slug', 'text', 'slug', 1, 0, 1, 1, 1, 1, '{\"slugify\":{\"origin\":\"title\"}}'),
-(20, 2, 'meta_description', 'text', 'meta_description', 1, 0, 1, 1, 1, 1, ''),
-(21, 2, 'meta_keywords', 'text', 'meta_keywords', 1, 0, 1, 1, 1, 1, ''),
-(22, 2, 'status', 'select_dropdown', 'status', 1, 1, 1, 1, 1, 1, '{\"default\":\"INACTIVE\",\"options\":{\"INACTIVE\":\"INACTIVE\",\"ACTIVE\":\"ACTIVE\"}}'),
-(23, 2, 'created_at', 'timestamp', 'created_at', 1, 1, 1, 0, 0, 0, ''),
-(24, 2, 'updated_at', 'timestamp', 'updated_at', 1, 0, 0, 0, 0, 0, ''),
-(25, 2, 'image', 'image', 'image', 0, 1, 1, 1, 1, 1, ''),
-(26, 3, 'id', 'number', 'id', 1, 0, 0, 0, 0, 0, ''),
-(27, 3, 'name', 'text', 'name', 1, 1, 1, 1, 1, 1, ''),
-(28, 3, 'email', 'text', 'email', 1, 1, 1, 1, 1, 1, ''),
-(29, 3, 'password', 'password', 'password', 1, 0, 0, 1, 1, 0, ''),
-(30, 3, 'remember_token', 'text', 'remember_token', 0, 0, 0, 0, 0, 0, ''),
-(31, 3, 'created_at', 'timestamp', 'created_at', 0, 1, 1, 0, 0, 0, ''),
-(32, 3, 'updated_at', 'timestamp', 'updated_at', 0, 0, 0, 0, 0, 0, ''),
-(33, 3, 'avatar', 'image', 'avatar', 0, 1, 1, 1, 1, 1, ''),
+(26, 3, 'id', 'number', 'id', 1, 0, 0, 0, 0, 0, NULL),
+(28, 3, 'email', 'text', 'E-mail', 1, 1, 1, 1, 1, 1, NULL),
+(29, 3, 'password', 'password', 'Password', 1, 0, 0, 1, 1, 0, NULL),
+(30, 3, 'remember_token', 'text', 'remember_token', 0, 0, 0, 0, 0, 0, NULL),
+(31, 3, 'created_at', 'timestamp', 'created_at', 0, 1, 1, 0, 0, 0, NULL),
+(32, 3, 'updated_at', 'timestamp', 'updated_at', 0, 0, 0, 0, 0, 0, NULL),
+(33, 3, 'avatar', 'image', 'Avatar', 0, 1, 1, 1, 1, 1, NULL),
 (34, 5, 'id', 'number', 'id', 1, 0, 0, 0, 0, 0, ''),
 (35, 5, 'name', 'text', 'name', 1, 1, 1, 1, 1, 1, ''),
 (36, 5, 'created_at', 'timestamp', 'created_at', 0, 0, 0, 0, 0, 0, ''),
@@ -148,7 +128,7 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (47, 6, 'created_at', 'timestamp', 'created_at', 0, 0, 0, 0, 0, 0, ''),
 (48, 6, 'updated_at', 'timestamp', 'updated_at', 0, 0, 0, 0, 0, 0, ''),
 (49, 6, 'display_name', 'text', 'Display Name', 1, 1, 1, 1, 1, 1, ''),
-(52, 3, 'role_id', 'text', 'role_id', 1, 1, 1, 1, 1, 1, ''),
+(52, 3, 'role_id', 'text', 'role_id', 0, 1, 1, 1, 1, 1, NULL),
 (83, 10, 'CID', 'text', 'Course ID', 1, 1, 1, 1, 1, 1, NULL),
 (84, 10, 'Ctype', 'text', 'Type', 1, 1, 1, 1, 1, 1, NULL),
 (85, 10, 'Cname', 'text', 'Name', 1, 1, 1, 1, 1, 1, NULL),
@@ -171,7 +151,19 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (102, 12, 'Bdetail', 'text_area', 'Detail', 0, 1, 1, 1, 1, 1, NULL),
 (103, 17, 'id', 'number', 'id', 1, 0, 0, 0, 0, 0, NULL),
 (104, 17, 'SID', 'select_dropdown', 'Student ID', 1, 1, 1, 1, 1, 1, '{\"relationship\":{\"method\":\"SID\",\"key\":\"SID\",\"label\":\"full\"}}'),
-(105, 17, 'section_id', 'select_dropdown', 'Section', 1, 1, 1, 1, 1, 1, '{\"relationship\":{\"key\":\"id\",\"label\":\"full\"}}');
+(105, 17, 'section_id', 'select_dropdown', 'Section', 1, 1, 1, 1, 1, 1, '{\"relationship\":{\"key\":\"id\",\"label\":\"full\"}}'),
+(106, 18, 'Coname', 'text', 'Competition Name', 1, 1, 1, 1, 1, 1, NULL),
+(107, 18, 'Coyear', 'number', 'Year', 1, 1, 1, 1, 1, 1, NULL),
+(108, 18, 'Coaward', 'text_area', 'Competition Award Detail', 0, 1, 1, 1, 1, 1, NULL),
+(109, 18, 'Cadvisor', 'select_dropdown', 'Competition Advisor', 0, 1, 1, 1, 1, 1, '{\"relationship\":{\"key\":\"id\",\"label\":\"users.fname\",\"method\":\"Cadvisor\"}}'),
+(110, 18, 'id', 'number', 'Id', 1, 0, 0, 0, 0, 0, NULL),
+(111, 20, 'Aname', 'text', 'Activity Name', 1, 1, 1, 1, 1, 1, NULL),
+(112, 20, 'Ayear', 'number', 'Year', 1, 1, 1, 1, 1, 1, NULL),
+(113, 20, 'Adetail', 'text_area', 'Activity Detail', 1, 1, 1, 1, 1, 1, NULL),
+(114, 20, 'Aadvisor', 'select_dropdown', 'Advisor', 1, 1, 1, 1, 1, 1, '{\"relationship\":{\"key\":\"id\",\"label\":\"users.fname\",\"method\":\"Aadvisor\"}}'),
+(115, 20, 'id', 'checkbox', 'Id', 1, 0, 0, 0, 0, 0, NULL),
+(117, 3, 'lname', 'text', 'Last Name', 1, 1, 1, 1, 1, 1, NULL),
+(118, 3, 'fname', 'checkbox', 'First name', 1, 1, 1, 1, 1, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -200,14 +192,15 @@ CREATE TABLE `data_types` (
 --
 
 INSERT INTO `data_types` (`id`, `name`, `slug`, `display_name_singular`, `display_name_plural`, `icon`, `model_name`, `controller`, `description`, `generate_permissions`, `server_side`, `created_at`, `updated_at`) VALUES
-(2, 'pages', 'pages', 'Page', 'Pages', 'voyager-file-text', 'TCG\\Voyager\\Models\\Page', '', '', 1, 0, '2017-04-17 09:01:12', '2017-04-17 09:01:12'),
-(3, 'users', 'users', 'User', 'Users', 'voyager-person', 'TCG\\Voyager\\Models\\User', '', '', 1, 0, '2017-04-17 09:01:12', '2017-04-17 09:01:12'),
+(3, 'users', 'users', 'User', 'Users', 'voyager-person', 'TCG\\Voyager\\Models\\User', NULL, NULL, 1, 0, '2017-04-17 09:01:12', '2017-04-29 06:12:30'),
 (5, 'menus', 'menus', 'Menu', 'Menus', 'voyager-list', 'TCG\\Voyager\\Models\\Menu', '', '', 1, 0, '2017-04-17 09:01:12', '2017-04-17 09:01:12'),
 (6, 'roles', 'roles', 'Role', 'Roles', 'voyager-lock', 'TCG\\Voyager\\Models\\Role', '', '', 1, 0, '2017-04-17 09:01:12', '2017-04-17 09:01:12'),
 (10, 'courses', 'courses', 'Course', 'Courses', 'voyager-book', 'App\\Course', 'CourseController', NULL, 1, 0, '2017-04-20 18:49:37', '2017-04-20 19:02:37'),
 (11, 'students', 'students', 'Student', 'Students', 'voyager-study', 'App\\Student', 'StudentController', 'Students', 1, 0, '2017-04-21 21:56:08', '2017-04-21 21:56:08'),
 (12, 'behavior_records', 'behavior-records', 'Behavior Record', 'Behavior Records', NULL, 'App\\BehaviorRecord', NULL, NULL, 1, 0, '2017-04-22 00:28:46', '2017-04-22 00:28:46'),
-(17, 'student_enroll_in_section', 'enrollment', 'Enrollment', 'Enrollment', NULL, 'App\\Enrollment', 'EnrollmentController', NULL, 1, 0, '2017-04-25 20:14:27', '2017-04-25 20:14:27');
+(17, 'student_enroll_in_section', 'enrollment', 'Enrollment', 'Enrollment', NULL, 'App\\Enrollment', 'EnrollmentController', NULL, 1, 0, '2017-04-25 20:14:27', '2017-04-25 20:14:27'),
+(18, 'competitions', 'competitions', 'Competition', 'Competitions', 'voyager-trophy', 'App\\Competition', 'CompetitionController', NULL, 1, 0, '2017-04-29 05:16:21', '2017-04-30 19:06:43'),
+(20, 'activities', 'activities', 'Activity', 'Activities', 'voyager-star-two', 'App\\Activity', 'ActivityController', NULL, 1, 0, '2017-04-29 06:09:00', '2017-04-30 19:09:10');
 
 -- --------------------------------------------------------
 
@@ -268,17 +261,18 @@ CREATE TABLE `menu_items` (
 
 INSERT INTO `menu_items` (`id`, `menu_id`, `title`, `url`, `target`, `icon_class`, `color`, `parent_id`, `order`, `created_at`, `updated_at`, `route`, `parameters`) VALUES
 (1, 1, 'Dashboard', '/admin', '_self', 'voyager-boat', NULL, NULL, 1, '2017-04-17 09:01:12', '2017-04-17 09:01:12', NULL, NULL),
-(2, 1, 'Media', '/admin/media', '_self', 'voyager-images', NULL, NULL, 6, '2017-04-17 09:01:12', '2017-04-20 18:51:35', NULL, NULL),
-(4, 1, 'Users', '/admin/users', '_self', 'voyager-person', NULL, NULL, 5, '2017-04-17 09:01:12', '2017-04-21 21:38:56', NULL, NULL),
-(5, 1, 'Categories', '/admin/categories', '_self', 'voyager-categories', NULL, NULL, 8, '2017-04-17 09:01:12', '2017-04-20 18:51:35', NULL, NULL),
-(6, 1, 'Pages', '/admin/pages', '_self', 'voyager-file-text', NULL, NULL, 7, '2017-04-17 09:01:12', '2017-04-20 18:51:35', NULL, NULL),
-(7, 1, 'Roles', '/admin/roles', '_self', 'voyager-lock', NULL, NULL, 4, '2017-04-17 09:01:12', '2017-04-21 21:38:56', NULL, NULL),
-(8, 1, 'Tools', '', '_self', 'voyager-tools', NULL, NULL, 9, '2017-04-17 09:01:12', '2017-04-20 18:51:35', NULL, NULL),
+(2, 1, 'Media', '/admin/media', '_self', 'voyager-images', NULL, NULL, 9, '2017-04-17 09:01:12', '2017-04-30 21:12:50', NULL, NULL),
+(4, 1, 'Users', '/admin/users', '_self', 'voyager-person', NULL, NULL, 8, '2017-04-17 09:01:12', '2017-04-30 21:12:50', NULL, NULL),
+(7, 1, 'Roles', '/admin/roles', '_self', 'voyager-lock', NULL, NULL, 7, '2017-04-17 09:01:12', '2017-04-30 21:12:50', NULL, NULL),
+(8, 1, 'Tools', '', '_self', 'voyager-tools', NULL, NULL, 10, '2017-04-17 09:01:12', '2017-04-30 21:12:50', NULL, NULL),
 (9, 1, 'Menu Builder', '/admin/menus', '_self', 'voyager-list', NULL, 8, 1, '2017-04-17 09:01:12', '2017-04-17 10:04:43', NULL, NULL),
 (10, 1, 'Database', '/admin/database', '_self', 'voyager-data', NULL, 8, 2, '2017-04-17 09:01:12', '2017-04-17 10:04:43', NULL, NULL),
-(11, 1, 'Settings', '/admin/settings', '_self', 'voyager-settings', NULL, NULL, 10, '2017-04-17 09:01:12', '2017-04-20 18:51:35', NULL, NULL),
-(12, 1, 'Student', '/admin/students', '_self', 'voyager-study', '#000000', NULL, 2, '2017-04-17 10:05:20', '2017-04-17 18:14:00', NULL, ''),
-(13, 1, 'Courses', '/admin/courses', '_self', 'voyager-book', '#000000', NULL, 3, '2017-04-20 18:51:25', '2017-04-21 21:38:56', NULL, '');
+(11, 1, 'Settings', '/admin/settings', '_self', 'voyager-settings', NULL, NULL, 11, '2017-04-17 09:01:12', '2017-04-30 21:12:50', NULL, NULL),
+(12, 1, 'Students', '/admin/students', '_self', 'voyager-study', '#000000', NULL, 3, '2017-04-17 10:05:20', '2017-04-30 21:12:51', NULL, ''),
+(13, 1, 'Courses', '/admin/courses', '_self', 'voyager-book', '#000000', NULL, 4, '2017-04-20 18:51:25', '2017-04-30 21:12:51', NULL, ''),
+(14, 1, 'Competitions', '/admin/competitions', '_self', 'voyager-trophy', '#000000', NULL, 5, '2017-04-30 08:50:48', '2017-04-30 21:12:51', NULL, ''),
+(15, 1, 'Activities', '/admin/activities', '_self', 'voyager-star-two', '#000000', NULL, 6, '2017-04-30 19:10:14', '2017-04-30 21:12:50', NULL, ''),
+(16, 1, 'Statistics', '/admin/statistics', '_self', 'voyager-bar-chart', '#000000', NULL, 2, '2017-04-30 21:12:26', '2017-04-30 21:12:51', NULL, '');
 
 -- --------------------------------------------------------
 
@@ -316,34 +310,6 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (17, '2017_01_15_000000_create_permission_groups_table', 1),
 (18, '2017_01_15_000000_make_table_name_nullable_in_permissions_table', 1),
 (19, '2017_03_06_000000_add_controller_to_data_types_table', 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pages`
---
-
-CREATE TABLE `pages` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `author_id` int(11) NOT NULL,
-  `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `excerpt` text COLLATE utf8mb4_unicode_ci,
-  `body` text COLLATE utf8mb4_unicode_ci,
-  `image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `meta_description` text COLLATE utf8mb4_unicode_ci,
-  `meta_keywords` text COLLATE utf8mb4_unicode_ci,
-  `status` enum('ACTIVE','INACTIVE') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'INACTIVE',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `pages`
---
-
-INSERT INTO `pages` (`id`, `author_id`, `title`, `excerpt`, `body`, `image`, `slug`, `meta_description`, `meta_keywords`, `status`, `created_at`, `updated_at`) VALUES
-(1, 0, 'Hello World', 'Hang the jib grog grog blossom grapple dance the hempen jig gangway pressgang bilge rat to go on account lugger. Nelsons folly gabion line draught scallywag fire ship gaff fluke fathom case shot. Sea Legs bilge rat sloop matey gabion long clothes run a shot across the bow Gold Road cog league.', '<p>Hello World. Scallywag grog swab Cat o\'nine tails scuttle rigging hardtack cable nipper Yellow Jack. Handsomely spirits knave lad killick landlubber or just lubber deadlights chantey pinnace crack Jennys tea cup. Provost long clothes black spot Yellow Jack bilged on her anchor league lateen sail case shot lee tackle.</p>\n<p>Ballast spirits fluke topmast me quarterdeck schooner landlubber or just lubber gabion belaying pin. Pinnace stern galleon starboard warp carouser to go on account dance the hempen jig jolly boat measured fer yer chains. Man-of-war fire in the hole nipperkin handsomely doubloon barkadeer Brethren of the Coast gibbet driver squiffy.</p>', 'pages/AAgCCnqHfLlRub9syUdw.jpg', 'hello-world', 'Yar Meta Description', 'Keyword1, Keyword2', 'ACTIVE', '2017-04-17 09:01:12', '2017-04-17 09:01:12');
 
 -- --------------------------------------------------------
 
@@ -386,11 +352,6 @@ INSERT INTO `permissions` (`id`, `key`, `table_name`, `created_at`, `updated_at`
 (7, 'edit_menus', 'menus', '2017-04-17 09:01:12', '2017-04-17 09:01:12', NULL),
 (8, 'add_menus', 'menus', '2017-04-17 09:01:12', '2017-04-17 09:01:12', NULL),
 (9, 'delete_menus', 'menus', '2017-04-17 09:01:12', '2017-04-17 09:01:12', NULL),
-(10, 'browse_pages', 'pages', '2017-04-17 09:01:12', '2017-04-17 09:01:12', NULL),
-(11, 'read_pages', 'pages', '2017-04-17 09:01:12', '2017-04-17 09:01:12', NULL),
-(12, 'edit_pages', 'pages', '2017-04-17 09:01:12', '2017-04-17 09:01:12', NULL),
-(13, 'add_pages', 'pages', '2017-04-17 09:01:12', '2017-04-17 09:01:12', NULL),
-(14, 'delete_pages', 'pages', '2017-04-17 09:01:12', '2017-04-17 09:01:12', NULL),
 (15, 'browse_roles', 'roles', '2017-04-17 09:01:12', '2017-04-17 09:01:12', NULL),
 (16, 'read_roles', 'roles', '2017-04-17 09:01:12', '2017-04-17 09:01:12', NULL),
 (17, 'edit_roles', 'roles', '2017-04-17 09:01:12', '2017-04-17 09:01:12', NULL),
@@ -420,7 +381,17 @@ INSERT INTO `permissions` (`id`, `key`, `table_name`, `created_at`, `updated_at`
 (66, 'read_student_enroll_in_section', 'student_enroll_in_section', '2017-04-25 20:14:27', '2017-04-25 20:14:27', NULL),
 (67, 'edit_student_enroll_in_section', 'student_enroll_in_section', '2017-04-25 20:14:27', '2017-04-25 20:14:27', NULL),
 (68, 'add_student_enroll_in_section', 'student_enroll_in_section', '2017-04-25 20:14:27', '2017-04-25 20:14:27', NULL),
-(69, 'delete_student_enroll_in_section', 'student_enroll_in_section', '2017-04-25 20:14:27', '2017-04-25 20:14:27', NULL);
+(69, 'delete_student_enroll_in_section', 'student_enroll_in_section', '2017-04-25 20:14:27', '2017-04-25 20:14:27', NULL),
+(70, 'browse_competitions', 'competitions', '2017-04-29 05:16:21', '2017-04-29 05:16:21', NULL),
+(71, 'read_competitions', 'competitions', '2017-04-29 05:16:21', '2017-04-29 05:16:21', NULL),
+(72, 'edit_competitions', 'competitions', '2017-04-29 05:16:21', '2017-04-29 05:16:21', NULL),
+(73, 'add_competitions', 'competitions', '2017-04-29 05:16:21', '2017-04-29 05:16:21', NULL),
+(74, 'delete_competitions', 'competitions', '2017-04-29 05:16:21', '2017-04-29 05:16:21', NULL),
+(75, 'browse_activities', 'activities', '2017-04-29 06:09:00', '2017-04-29 06:09:00', NULL),
+(76, 'read_activities', 'activities', '2017-04-29 06:09:00', '2017-04-29 06:09:00', NULL),
+(77, 'edit_activities', 'activities', '2017-04-29 06:09:00', '2017-04-29 06:09:00', NULL),
+(78, 'add_activities', 'activities', '2017-04-29 06:09:00', '2017-04-29 06:09:00', NULL),
+(79, 'delete_activities', 'activities', '2017-04-29 06:09:00', '2017-04-29 06:09:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -450,6 +421,7 @@ CREATE TABLE `permission_role` (
 
 INSERT INTO `permission_role` (`permission_id`, `role_id`) VALUES
 (1, 1),
+(1, 3),
 (2, 1),
 (3, 1),
 (4, 1),
@@ -469,20 +441,60 @@ INSERT INTO `permission_role` (`permission_id`, `role_id`) VALUES
 (23, 1),
 (24, 1),
 (50, 1),
+(50, 3),
 (51, 1),
+(51, 3),
 (52, 1),
+(52, 3),
 (53, 1),
+(53, 3),
 (54, 1),
+(54, 3),
 (55, 1),
+(55, 3),
 (56, 1),
+(56, 3),
 (57, 1),
+(57, 3),
 (58, 1),
+(58, 3),
 (59, 1),
+(59, 3),
 (60, 1),
+(60, 3),
 (61, 1),
+(61, 3),
 (62, 1),
+(62, 3),
 (63, 1),
-(64, 1);
+(63, 3),
+(64, 1),
+(64, 3),
+(65, 3),
+(66, 3),
+(67, 3),
+(68, 3),
+(69, 3),
+(70, 1),
+(70, 3),
+(71, 1),
+(71, 3),
+(72, 1),
+(72, 3),
+(73, 1),
+(73, 3),
+(74, 1),
+(74, 3),
+(75, 1),
+(75, 3),
+(76, 1),
+(76, 3),
+(77, 1),
+(77, 3),
+(78, 1),
+(78, 3),
+(79, 1),
+(79, 3);
 
 -- --------------------------------------------------------
 
@@ -504,7 +516,8 @@ CREATE TABLE `roles` (
 
 INSERT INTO `roles` (`id`, `name`, `display_name`, `created_at`, `updated_at`) VALUES
 (1, 'admin', 'Administrator', '2017-04-17 09:01:12', '2017-04-17 09:01:12'),
-(2, 'user', 'Normal User', '2017-04-17 09:01:12', '2017-04-17 09:01:12');
+(2, 'user', 'Normal User', '2017-04-17 09:01:12', '2017-04-17 09:01:12'),
+(3, 'teacher', 'Teacher', '2017-04-30 08:51:48', '2017-04-30 08:51:48');
 
 -- --------------------------------------------------------
 
@@ -569,15 +582,11 @@ CREATE TABLE `students` (
   `Sedu_stat` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `Shealth_stat` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `Sbehav_score` int(11) NOT NULL DEFAULT '0',
-  `Sdetail` varchar(171) COLLATE utf8_unicode_ci DEFAULT NULL
+  `Sdetail` varchar(171) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `TID` int(11) NOT NULL,
+  `Dname` varchar(171) COLLATE utf8_unicode_ci NOT NULL,
+  `Sgrad_stat` varchar(20) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `students`
---
-
-INSERT INTO `students` (`SID`, `SFname`, `SLname`, `Sgender`, `Sbirth`, `Snation`, `Senroll_date`, `Sedu_stat`, `Shealth_stat`, `Sbehav_score`, `Sdetail`) VALUES
-('5732541985', 'BB', 'L', 'female', '1996-02-13', 'th', '2014-12-31', 'PRO', 'HEALTHY', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -601,8 +610,8 @@ CREATE TABLE `student_enroll_in_section` (
   `id` int(11) NOT NULL,
   `SID` char(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `section_id` int(11) NOT NULL,
-  `grade` float(3, 2),
-  `score` float(3, 2)
+  `grade` float(3,2) DEFAULT NULL,
+  `score` float(3,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- --------------------------------------------------------
@@ -626,6 +635,27 @@ CREATE TABLE `student_particippate_in_activity` (
 CREATE TABLE `teachers` (
   `id` int(11) NOT NULL,
   `user` int(10) NOT NULL,
+  `Dname` varchar(171) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+-- teachersInDept
+
+CREATE TABLE `teachers_in_dept` (
+  `id` int(11) NOT NULL,
+  `Dname` varchar(171) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+-- managers 
+
+CREATE TABLE `managers` (
+  `id` int(11) NOT NULL,
+  `user` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+-- managers_of_dept
+
+CREATE TABLE `managers_of_dept` (
+  `id` int(11) NOT NULL,
   `Dname` varchar(171) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
@@ -699,7 +729,8 @@ INSERT INTO `translations` (`id`, `table_name`, `column_name`, `foreign_key`, `l
 CREATE TABLE `users` (
   `id` int(10) UNSIGNED NOT NULL,
   `role_id` int(11) DEFAULT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fname` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lname` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `avatar` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -707,13 +738,6 @@ CREATE TABLE `users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `avatar`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Admin', 'admin@admin.com', 'users/default.png', '$2y$10$uv5MPvXtQmY6xMjq2Gnl2uognr3MrjCdbXgxFwZQs7H7G5uWrwKjO', 'beHPtMdBFNareZBVRXW8pC67Ht7euQEoRkpDnRGnEooVJ3Xvlf5KNXvgxBtX', '2017-04-17 09:01:12', '2017-04-17 09:01:12');
 
 --
 -- Indexes for dumped tables
@@ -793,13 +817,6 @@ ALTER TABLE `menu_items`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `pages`
---
-ALTER TABLE `pages`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `pages_slug_unique` (`slug`);
 
 --
 -- Indexes for table `password_resets`
@@ -885,6 +902,16 @@ ALTER TABLE `student_particippate_in_activity`
 ALTER TABLE `teachers`
   ADD PRIMARY KEY (`id`);
 
+ALTER TABLE `teachers_in_dept`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `managers`
+  ADD PRIMARY KEY (`user`),
+  ADD UNIQUE KEY `id` (`id`);
+  
+ALTER TABLE `managers_of_dept`
+  ADD PRIMARY KEY (`id`);
+
 --
 -- Indexes for table `teach_sections`
 --
@@ -913,22 +940,22 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `activities`
 --
 ALTER TABLE `activities`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `competitions`
 --
 ALTER TABLE `competitions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `data_rows`
 --
 ALTER TABLE `data_rows`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
 --
 -- AUTO_INCREMENT for table `data_types`
 --
 ALTER TABLE `data_types`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `menus`
 --
@@ -938,22 +965,17 @@ ALTER TABLE `menus`
 -- AUTO_INCREMENT for table `menu_items`
 --
 ALTER TABLE `menu_items`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
--- AUTO_INCREMENT for table `pages`
---
-ALTER TABLE `pages`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 --
 -- AUTO_INCREMENT for table `permission_groups`
 --
@@ -963,12 +985,12 @@ ALTER TABLE `permission_groups`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `sections`
 --
 ALTER TABLE `sections`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `settings`
 --
@@ -978,22 +1000,26 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `student_compete_in_competition`
 --
 ALTER TABLE `student_compete_in_competition`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `student_enroll_in_section`
 --
 ALTER TABLE `student_enroll_in_section`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `student_particippate_in_activity`
 --
 ALTER TABLE `student_particippate_in_activity`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `teachers`
 --
 ALTER TABLE `teachers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+ALTER TABLE `managers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `translations`
 --
@@ -1003,7 +1029,7 @@ ALTER TABLE `translations`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- Constraints for dumped tables
 --
@@ -1041,12 +1067,6 @@ ALTER TABLE `permission_role`
   ADD CONSTRAINT `permission_role_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `sections`
---
-ALTER TABLE `sections`
-  ADD CONSTRAINT `fk_courses` FOREIGN KEY (`CID`) REFERENCES `courses` (`CID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `student_compete_in_competition`
 --
 ALTER TABLE `student_compete_in_competition`
@@ -1057,6 +1077,12 @@ ALTER TABLE `student_compete_in_competition`
 --
 ALTER TABLE `student_particippate_in_activity`
   ADD CONSTRAINT `fk_activities` FOREIGN KEY (`activity`) REFERENCES `activities` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `sections`
+--
+ALTER TABLE `sections`
+  ADD CONSTRAINT `fk_courses` FOREIGN KEY (`CID`) REFERENCES `courses` (`CID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

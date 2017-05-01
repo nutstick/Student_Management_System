@@ -84,12 +84,12 @@
                         </a>
                       @endif
                       @if (Voyager::can('edit_'.$dataType->name))
-                        <a href="{{ route('voyager.'.$dataType->slug.'.edit', $data->id) }}" title="Edit" class="btn btn-sm btn-primary pull-right edit">
+                        <a href="{{ route('voyager.sections.edit', $data->id) }}" title="Edit" class="btn btn-sm btn-primary pull-right edit">
                           <i class="voyager-edit"></i> <span class="hidden-xs hidden-sm">Edit</span>
                         </a>
                       @endif
                       @if (Voyager::can('read_'.$dataType->name))
-                        <a href="{{ route('voyager.'.$dataType->slug.'.show', $data->id) }}" title="View" class="btn btn-sm btn-warning pull-right">
+                        <a href="{{ route('voyager.sections.show', $data->id) }}" title="View" class="btn btn-sm btn-warning pull-right">
                           <i class="voyager-eye"></i> <span class="hidden-xs hidden-sm">View</span>
                         </a>
                       @endif
@@ -120,7 +120,7 @@
             className: "btn btn-info",
             text: '<i class="glyphicon glyphicon-pencil" style="padding-right: 12px;"></i>Create',
             action: function ( e, dt, node, config ) {
-              window.location = {route('voyager.'.$dataType->slug.'.edit', $data->id)}
+              window.location = "{{ route('voyager.sections.create') }}"
             }
           }
         ],

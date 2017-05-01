@@ -100,6 +100,42 @@
     </div>
 	</div>
 
+  <div class="modal fade" id="add_student_modal">
+      <div class="modal-dialog">
+          <div class="modal-content">
+
+              <div class="modal-header">
+                  <h4 class="modal-title"><i class="voyager-warning"></i>Select students</h4>
+              </div>
+
+              <div class="modal-body">
+                  <style>
+                    .modal-open span.select2-container {
+                      z-index: 100002 !important;
+                      width: 100% !important;
+                    },
+                    .select2-dropdown {
+                      z-index: 100002!important;
+                    }
+                  </style>
+                  <select class="form-control select2" id="SID" name="SID">
+                    @foreach($allStudents as $student)
+                      <option value="{{ $student->SID }}">
+                        {{ $student->fullname }}
+                      </option>
+                    @endforeach
+                  </select>
+              </div>
+
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary" id="confirm_add">Add
+                  </button>
+              </div>
+          </div>
+      </div>
+  </div>
+
   <div class="modal fade modal-danger" id="confirm_delete_student_modal">
       <div class="modal-dialog">
           <div class="modal-content">
@@ -138,7 +174,7 @@
             className: "btn btn-info",
             text: '<i class="glyphicon glyphicon-pencil" style="padding-right: 12px;"></i>Add student',
             action: function ( e, dt, node, config ) {
-              $('#add').modal('show');
+              $('#add_student_modal').modal('show');
             }
           }
         ],
@@ -151,7 +187,7 @@
       });
     });
 
-    $('#add').on('click', '#add_student', function(e) {
+    $('#add_student_modal').on('click', '#confirm_add', function(e) {
       var params = {
         SID: $('#SID').val(),
         _token: "{{ csrf_token() }}"
