@@ -100,7 +100,6 @@
     </div>
 	</div>
 
-  
   <div class="modal fade modal-danger" id="confirm_delete_student_modal">
       <div class="modal-dialog">
           <div class="modal-content">
