@@ -46,7 +46,11 @@ Route::group(['prefix' => 'admin'], function () {
         'as' => 'statistics.',
         'prefix' => 'statistics',
     ], function () {
-        Route::get('/', ['uses' => 'StaticController@index', 'as' => 'index']);
+        Route::get('/', ['uses' => 'StatisticController@index', 'as' => 'index']);
     });
     Voyager::routes();
+});
+
+Route::any('{slug}', function() {
+    return redirect('/admin');
 });

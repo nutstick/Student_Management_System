@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 use TCG\Voyager\Facades\Voyager;
 use TCG\Voyager\Http\Controllers\VoyagerBreadController;
 
-class CourseController extends VoyagerBreadController
+class DepartmentController extends VoyagerBreadController
 {
     //***************************************
     //               ____
@@ -46,7 +46,7 @@ class CourseController extends VoyagerBreadController
             if ($model->timestamps) {
                 $dataTypeContent = call_user_func([$model->with($relationships)->latest(), $getter]);
             } else {
-                $dataTypeContent = call_user_func([$model->with($relationships)->orderBy('CID', 'DESC'), $getter]);
+                $dataTypeContent = call_user_func([$model->with($relationships)->orderBy('Dname', 'DESC'), $getter]);
             }
 
             //Replace relationships' keys for labels and create READ links if a slug is provided.
@@ -95,38 +95,16 @@ class CourseController extends VoyagerBreadController
             $dataTypeContent = call_user_func([$model->with($relationships), 'findOrFail'], $id);
         } else {
             // If Model doest exist, get data from table name
-            $dataTypeContent = DB::table($dataType->name)->where('CID', $id)->first();
+            $dataTypeContent = DB::table($dataType->name)->where('Dname', $id)->first();
         }
 
+        $view = 'voyager::bread.browse';
 
-        //Replace relationships' keys for labels and create READ links if a slug is provided.
-        $dataTypeContent = $this->resolveRelations($dataTypeContent, $dataType, true);
-        
-        // Section
-        $sectionType = array('SeTerm' => 'Term', 'SeYear' => 'Year', 'SeNum' => 'Section',
-            'SeNote' => 'Note');
+        if (view()->exists("voyager::$slug.read")) {
+            $view = "voyager::$slug.read";
+        }
 
-        $sections = DB::table('sections')
-            ->where('CID', $id)
-            ->select('*')
-            ->get();
-
-        // Enrollment
-        $enrollType = array('SeNum' => 'Section Number', 'SeTerm' => 'Term', 'SeYear' => 'Year',
-            'SID' => 'Student ID', 'SFname' => 'First Name', 'SLname' => 'Last Name',
-            'grade' => 'Grade', 'score' => 'Score');
-
-        $enrollments = DB::table('student_enroll_in_section')
-            ->join('sections', 'student_enroll_in_section.section_id', '=', 'sections.id')
-            ->join('students', 'student_enroll_in_section.SID', '=', 'students.SID')
-            ->where('sections.CID', $id)
-            ->select('students.SLname', 'students.SID', 'students.SFname', 'student_enroll_in_section.*', 'sections.*', 'student_enroll_in_section.id')
-            ->get();
-        
-        Log::info($enrollType);
-        Log::info($enrollments);
-
-        return view('courses.read', compact('dataType', 'dataTypeContent',
+        return view($view, compact('dataType', 'dataTypeContent',
             'sectionType', 'sections', 'enrollType', 'enrollments'));
     }
 
@@ -155,7 +133,7 @@ class CourseController extends VoyagerBreadController
 
         $dataTypeContent = (strlen($dataType->model_name) != 0)
             ? app($dataType->model_name)->with($relationships)->findOrFail($id)
-            : DB::table($dataType->name)->where('CID', $id)->first(); // If Model doest exist, get data from table name
+            : DB::table($dataType->name)->where('Dname', $id)->first(); // If Model doest exist, get data from table name
 
         // Check if BREAD is Translatable
         $isModelTranslatable = isBreadTranslatable($dataTypeContent);

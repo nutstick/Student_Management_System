@@ -181,7 +181,7 @@ class StudentController extends VoyagerBreadController
             
         // Competition
         $competitionType = array('Coname' => 'Competition', 'Coyear' => 'Year', 'Coaward' => 'Award',
-            'SFullname' => 'Student name', 'name' => 'Instructor Name');
+            'SFullname' => 'Student name', 'UFullname' => 'Instructor Name');
         /*
         SELECT competitions.Coname, competitions.Coyear, competitions.Coaward,
             CONCAT(students.SFname, ' ', students.SLname) AS SFullname,
@@ -205,7 +205,7 @@ class StudentController extends VoyagerBreadController
             ->join('students', 'student_compete_in_competition.SID', '=', 'students.SID')
             ->select('student_compete_in_competition.id', 'competitions.Coname', 'competitions.Coyear', 'competitions.Coaward',
                 DB::raw('CONCAT(students.SFname, " ", students.SLname) AS SFullname'),
-                DB::raw('CONCAT(users.fname, " ", users.lname) AS SFullname'),
+                DB::raw('CONCAT(users.fname, " ", users.lname) AS UFullname'),
                 'users.id AS uid')
             ->get();
 

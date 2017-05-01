@@ -8,8 +8,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use TCG\Voyager\Facades\Voyager;
 use TCG\Voyager\Http\Controllers\VoyagerBreadController;
+use Charts;
 
-class CourseController extends VoyagerBreadController
+class SectionController extends VoyagerBreadController
 {
     //***************************************
     //               ____
@@ -46,7 +47,7 @@ class CourseController extends VoyagerBreadController
             if ($model->timestamps) {
                 $dataTypeContent = call_user_func([$model->with($relationships)->latest(), $getter]);
             } else {
-                $dataTypeContent = call_user_func([$model->with($relationships)->orderBy('CID', 'DESC'), $getter]);
+                $dataTypeContent = call_user_func([$model->with($relationships)->orderBy('id', 'DESC'), $getter]);
             }
 
             //Replace relationships' keys for labels and create READ links if a slug is provided.
@@ -95,39 +96,49 @@ class CourseController extends VoyagerBreadController
             $dataTypeContent = call_user_func([$model->with($relationships), 'findOrFail'], $id);
         } else {
             // If Model doest exist, get data from table name
-            $dataTypeContent = DB::table($dataType->name)->where('CID', $id)->first();
+            $dataTypeContent = DB::table($dataType->name)->where('id', $id)->first();
         }
 
+        $score = DB::select("SELECT score FROM student_enroll_in_section
+          WHERE section_id = $id
+          GROUP BY score ORDER BY score");
+        $label = range(10, 100, 10);
+        $index = 0;
+        $values = Array(sizeof($label));
+        foreach($score as $s) {
+            if ($label[$index] < $s->score) {
+                $index++;
+            }
+            $values[$index]++;
+        }
 
-        //Replace relationships' keys for labels and create READ links if a slug is provided.
-        $dataTypeContent = $this->resolveRelations($dataTypeContent, $dataType, true);
-        
-        // Section
-        $sectionType = array('SeTerm' => 'Term', 'SeYear' => 'Year', 'SeNum' => 'Section',
-            'SeNote' => 'Note');
-
-        $sections = DB::table('sections')
-            ->where('CID', $id)
-            ->select('*')
-            ->get();
+        $chart = Charts::create('bar', 'chartjs')
+          ->title("Score distribution")
+          ->dimensions(0, 400)
+          ->template("material")
+          ->labels($label)
+          ->values($values);
 
         // Enrollment
-        $enrollType = array('SeNum' => 'Section Number', 'SeTerm' => 'Term', 'SeYear' => 'Year',
-            'SID' => 'Student ID', 'SFname' => 'First Name', 'SLname' => 'Last Name',
+        $enrollType = array('SID' => 'Student ID', 'SFname' => 'First Name', 'SLname' => 'Last Name',
             'grade' => 'Grade', 'score' => 'Score');
 
         $enrollments = DB::table('student_enroll_in_section')
-            ->join('sections', 'student_enroll_in_section.section_id', '=', 'sections.id')
             ->join('students', 'student_enroll_in_section.SID', '=', 'students.SID')
-            ->where('sections.CID', $id)
-            ->select('students.SLname', 'students.SID', 'students.SFname', 'student_enroll_in_section.*', 'sections.*', 'student_enroll_in_section.id')
+            ->where('student_enroll_in_section.section_id', '=', $id)
+            ->select('students.SLname', 'students.SID', 'students.SFname', 'student_enroll_in_section.*', 'student_enroll_in_section.id')
             ->get();
-        
-        Log::info($enrollType);
-        Log::info($enrollments);
 
-        return view('courses.read', compact('dataType', 'dataTypeContent',
-            'sectionType', 'sections', 'enrollType', 'enrollments'));
+        $view = 'voyager::bread.browse';
+
+        if (view()->exists("voyager::$slug.read")) {
+            $view = "voyager::$slug.read";
+        }
+
+        Log::info(compact('dataType', 'dataTypeContent',
+            'chart', 'enrollType', 'enrollments'));
+        return view('sections.read', compact('dataType', 'dataTypeContent',
+            'chart', 'enrollType', 'enrollments'));
     }
 
     //***************************************
@@ -155,7 +166,7 @@ class CourseController extends VoyagerBreadController
 
         $dataTypeContent = (strlen($dataType->model_name) != 0)
             ? app($dataType->model_name)->with($relationships)->findOrFail($id)
-            : DB::table($dataType->name)->where('CID', $id)->first(); // If Model doest exist, get data from table name
+            : DB::table($dataType->name)->where('id', $id)->first(); // If Model doest exist, get data from table name
 
         // Check if BREAD is Translatable
         $isModelTranslatable = isBreadTranslatable($dataTypeContent);

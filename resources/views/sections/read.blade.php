@@ -1,5 +1,6 @@
 @extends('voyager::master')
 
+{!! Charts::assets() !!}
 <link rel="stylesheet" href="{{asset('css/student.css')}}" />
 <link rel="stylesheet" href="{{asset('css/buttons.bootstrap.min.css')}}" />
 
@@ -52,52 +53,15 @@
 		<div class="panel panel-bordered main-panel">
 			<!-- Nav tabs -->
 			<ul class="nav nav-tabs" role="tablist">
-				<li role="presentation" class="active"><a href="#sections" aria-controls="sections" role="tab" data-toggle="tab">Sections</a></li>
+				<li role="presentation" class="active"><a href="#statics" aria-controls="statics" role="tab" data-toggle="tab">Statics</a></li>
 				<li role="presentation"><a href="#enrollments" aria-controls="enrollments" role="tab" data-toggle="tab">Enrollments</a></li>
 			</ul>
 			<!-- Tab panes -->
 			<div class="tab-content">
-				<div role="tabpanel" class="tab-pane active" id="sections">
+				<div role="tabpanel" class="tab-pane active" id="statics">
           <div class="row">
             <div class="col-md-12">
-              <table id="dataTable" class="row table table-hover">
-                <thead>
-                  <tr>
-                    @foreach($sectionType as $row => $label)
-                    <th>{{ $label }}</th>
-                    @endforeach
-                    <th class="actions">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @foreach($sections as $data)
-                  <tr>
-                    @foreach($sectionType as $row => $label)
-                      <td>
-                        {{ $data->{$row} }}
-                      </td>
-                    @endforeach
-                    <td class="no-sort no-click" id="bread-actions">
-                      @if (Voyager::can('delete_sections'))
-                        <a href="javascript:;" title="Delete" class="btn btn-sm btn-danger pull-right delete" data-id="{{ $data->id }}" id="delete-{{ $data->id }}">
-                          <i class="voyager-trash"></i> <span class="hidden-xs hidden-sm">Delete</span>
-                        </a>
-                      @endif
-                      @if (Voyager::can('edit_sections'))
-                        <a href="{{ route('voyager.sections.edit', $data->id) }}" title="Edit" class="btn btn-sm btn-primary pull-right edit">
-                          <i class="voyager-edit"></i> <span class="hidden-xs hidden-sm">Edit</span>
-                        </a>
-                      @endif
-                      @if (Voyager::can('read_sections'))
-                        <a href="{{ route('voyager.sections.show', $data->id) }}" title="View" class="btn btn-sm btn-warning pull-right">
-                          <i class="voyager-eye"></i> <span class="hidden-xs hidden-sm">View</span>
-                        </a>
-                      @endif
-                    </td>
-                  </tr>
-                  @endforeach
-                </tbody>
-              </table>
+              {!! $chart->render() !!}
             </div>
           </div>
         </div>

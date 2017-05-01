@@ -105,7 +105,7 @@
           <div class="modal-content">
 
               <div class="modal-header">
-                  <h4 class="modal-title"><i class="voyager-warning"></i>Select students</h4>
+                  <h4 class="modal-title">Select students</h4>
               </div>
 
               <div class="modal-body">

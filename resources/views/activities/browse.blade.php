@@ -89,7 +89,7 @@
                                                 <div class="readmore">{{ strlen( strip_tags($data->{$row->field}, '<b><i><u>') ) > 200 ? substr(strip_tags($data->{$row->field}, '<b><i><u>'), 0, 200) . ' ...' : strip_tags($data->{$row->field}, '<b><i><u>') }}</div>
                                             @else
                                                 @include('voyager::multilingual.input-hidden-bread-browse')
-                                                @if($row->field == "Cadvisor")
+                                                @if($row->field == "Aadvisor")
                                                 <span>{{ $data->advisor }}</span>
                                                 @else
                                                 <span>{{ $data->{$row->field} }}</span>

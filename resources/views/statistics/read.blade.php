@@ -7,18 +7,26 @@
 @section('page_title','View Stat summary')
 
 @section('page_header')
+	<h1 class="page-title">
+		<i class="voyager-bar-chart"></i> Viewing Statistic &nbsp;
+	</h1>
 	@include('voyager::multilingual.language-selector')
 @stop
 
 @section('content')
 	<div class="page-content container-fluid">
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-sm-12">
+        <div class="panel panel-bordered main-panel">
+          {!! $chart3->render() !!}
+        </div>
+			</div>
+			<div class="col-sm-6">
         <div class="panel panel-bordered main-panel">
           {!! $chart2->render() !!}
         </div>
 			</div>
-			<div class="col-md-6">
+			<div class="col-sm-6">
         <div class="panel panel-bordered main-panel">
           {!! $chart1->render() !!}
         </div>

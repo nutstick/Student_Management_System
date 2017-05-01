@@ -45,7 +45,6 @@ class CompetitionController extends VoyagerBreadController
 
             $relationships = $this->getRelationships($dataType);
 
-            Log::info('Showing user profile for user: '.$model->timestamps);
             if ($model->timestamps) {
                 $dataTypeContent = call_user_func([$model->with($relationships)->latest(), $getter]);
             } else {
