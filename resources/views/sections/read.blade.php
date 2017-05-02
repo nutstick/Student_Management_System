@@ -74,7 +74,6 @@
                     @foreach($enrollType as $row => $label)
                     <th>{{ $label }}</th>
                     @endforeach
-                    <th class="actions">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -85,23 +84,6 @@
                         {{ $data->{$row} }}
                       </td>
                     @endforeach
-                    <td class="no-sort no-click" id="bread-actions">
-                      @if (Voyager::can('delete_'.$dataType->name))
-                        <a href="javascript:;" title="Delete" class="btn btn-sm btn-danger pull-right delete" data-id="{{ $data->id }}" id="delete-{{ $data->id }}">
-                          <i class="voyager-trash"></i> <span class="hidden-xs hidden-sm">Delete</span>
-                        </a>
-                      @endif
-                      @if (Voyager::can('edit_'.$dataType->name))
-                        <a href="#" title="Edit" class="btn btn-sm btn-primary pull-right edit">
-                          <i class="voyager-edit"></i> <span class="hidden-xs hidden-sm">Edit</span>
-                        </a>
-                      @endif
-                      @if (Voyager::can('read_'.$dataType->name))
-                        <a href="#" title="View" class="btn btn-sm btn-warning pull-right">
-                          <i class="voyager-eye"></i> <span class="hidden-xs hidden-sm">View</span>
-                        </a>
-                      @endif
-                    </td>
                   </tr>
                   @endforeach
                 </tbody>

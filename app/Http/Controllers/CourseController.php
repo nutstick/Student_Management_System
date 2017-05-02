@@ -122,9 +122,6 @@ class CourseController extends VoyagerBreadController
             ->where('sections.CID', $id)
             ->select('students.SLname', 'students.SID', 'students.SFname', 'student_enroll_in_section.*', 'sections.*', 'student_enroll_in_section.id')
             ->get();
-        
-        Log::info($enrollType);
-        Log::info($enrollments);
 
         return view('courses.read', compact('dataType', 'dataTypeContent',
             'sectionType', 'sections', 'enrollType', 'enrollments'));

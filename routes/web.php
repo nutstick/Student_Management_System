@@ -54,3 +54,7 @@ Route::group(['prefix' => 'admin'], function () {
 Route::any('{slug}', function() {
     return redirect('/admin');
 });
+
+Route::any('/', function() {
+    return redirect('/admin');
+});

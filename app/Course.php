@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Course extends Model
 {
     protected $appends = ['id'];
+    protected $casts = [
+        'CID' => 'string',
+    ];
 
     public $timestamps = false;
 

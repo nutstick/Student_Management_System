@@ -130,7 +130,7 @@ class StudentController extends VoyagerBreadController
         $isModelTranslatable = isBreadTranslatable($dataTypeContent);
 
         // Grade
-        $gradeType = array('CID' => 'Course ID', 'Cname' => 'Course Name', 'SeNum' => '#',
+        $gradeType = array('CID' => 'Course ID', 'Cname' => 'Course Name', 'SeNum' => 'Section Number',
             'SeTerm' => 'term', 'SeYear' => 'year', 'SeNote' => 'Note',
             'grade' => 'Grade');
 
@@ -160,14 +160,14 @@ class StudentController extends VoyagerBreadController
 
         // Enrollment
         $enrollType = array('CID' => 'Course ID', 'Cname' => 'Name', 'SeNum' => 'Section',
-            'SeTerm' => 'Term', 'SeYear' => 'Year', 'SeNote' => 'Note');
+            'SeTerm' => 'Term', 'SeYear' => 'Year', 'SeNote' => 'Note', 'grade' => 'Grade', 'score' => 'Score');
 
         $enrollments = DB::table('student_enroll_in_section')
             ->where('SID', $id)
             ->join('sections', 'student_enroll_in_section.section_id', '=', 'sections.id')
             ->join('courses', 'sections.CID', '=', 'courses.CID')
             ->select('student_enroll_in_section.id', 'sections.SeNum', 'sections.SeTerm', 'sections.SeYear', 'sections.SeNote',
-                'courses.CID', 'courses.Cname')
+                'courses.CID', 'courses.Cname', 'score', 'grade')
             ->get();
             
         // Behavior

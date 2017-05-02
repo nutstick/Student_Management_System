@@ -101,13 +101,16 @@ class SectionController extends VoyagerBreadController
 
         $score = DB::select("SELECT score FROM student_enroll_in_section
           WHERE section_id = $id
-          GROUP BY score ORDER BY score");
+          ORDER BY score");
         $label = range(10, 100, 10);
         $index = 0;
-        $values = Array(sizeof($label));
+        $values = [];//Array(sizeof($label));
         foreach($score as $s) {
             if ($label[$index] < $s->score) {
                 $index++;
+            }
+            if (!array_key_exists($index, $values)) {
+                $values[$index] = 0;
             }
             $values[$index]++;
         }
