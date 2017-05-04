@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 02, 2017 at 02:55 AM
+-- Generation Time: May 02, 2017 at 10:09 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.1
 
@@ -192,7 +192,7 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (93, 11, 'Senroll_date', 'date', 'Enrollment Date', 1, 1, 1, 1, 1, 1, NULL),
 (94, 11, 'Sedu_stat', 'select_dropdown', 'Education status', 1, 1, 1, 1, 1, 1, '{\"options\":{\"PRO\":\"Probation\",\"NONE\":\"-\"}}'),
 (95, 11, 'Shealth_stat', 'select_dropdown', 'Health status', 1, 1, 1, 1, 1, 1, '{\"options\":{\"HEALTHY\":\"Healthy\",\"SICKED\":\"Sicked\"}}'),
-(96, 11, 'Sbehav_score', 'number', 'Behavior Score', 1, 1, 1, 1, 1, 1, NULL),
+(96, 11, 'Sbehav_score', 'number', 'Behavior Score', 1, 0, 0, 0, 0, 0, NULL),
 (97, 11, 'Sdetail', 'text_area', 'General Detail', 0, 1, 1, 1, 1, 1, NULL),
 (98, 12, 'Btime', 'timestamp', 'Time', 1, 1, 1, 1, 1, 1, NULL),
 (99, 12, 'SID', 'text', 'SID', 1, 1, 1, 1, 1, 1, NULL),
@@ -222,9 +222,9 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (124, 21, 'SeNote', 'text_area', 'Note', 0, 1, 1, 1, 1, 1, NULL),
 (125, 22, 'Dname', 'text', 'Department Name', 1, 1, 1, 1, 1, 1, NULL),
 (126, 22, 'Dfaculty', 'text', 'Faculty', 1, 1, 1, 1, 1, 1, NULL),
-(127, 11, 'TID', 'checkbox', 'TID', 1, 1, 1, 1, 1, 1, NULL),
-(128, 11, 'Dname', 'checkbox', 'Dname', 1, 1, 1, 1, 1, 1, NULL),
-(129, 11, 'Sgrad_stat', 'checkbox', 'Sgrad Stat', 1, 1, 1, 1, 1, 1, NULL);
+(127, 11, 'TID', 'select_dropdown', 'Teacher', 1, 1, 1, 1, 1, 1, '{\"relations\":{\"key\":\"TID\",\"label\":\"TID\"}}'),
+(128, 11, 'Dname', 'select_dropdown', 'Department', 1, 1, 1, 1, 1, 1, '{\"relations\":{\"key\":\"Dname\",\"label\":\"Dname\"}}'),
+(129, 11, 'Sgrad_stat', 'select_dropdown', 'Graduate Status', 1, 1, 1, 1, 1, 1, '{\"options\":{\"STUDYING\":\"Studying\",\"GRADUATED\":\"Graduated\",\"FIRST_CLASS_HONOR\":\"First class honor\",\"SECOND_CLASS_HONOR\":\"Second clas honor\"}}');
 
 -- --------------------------------------------------------
 
